@@ -43,9 +43,24 @@ function counter() {
 // But now that we know about closures, we can do something way cooler. 
 // Finish the implementation of makeCounter below so that we can make 
 // multiple counters, each with their own internal count using closures.
-
+/*
 function makeCounter() {
   // YOUR CODE HERE
+  var counter = 0;
+  return function myCount() {
+    return counter = counter + 1;
+  }
+}
+*/
+
+function makeCounter(initial) {
+  // YOUR CODE HERE
+  var counter = initial;
+  function myCount() {
+    return counter = counter + 1;
+  }
+
+  return myCount;
 }
 
 var counter1 = makeCounter();
@@ -71,6 +86,12 @@ function pow(exponent) {
 //   return function(???) {
 //     return ???
 //   }
+    
+    function powThis(base) {
+      return Math.pow(base, exponent);
+    }
+
+    return powThis;
 }
 
 // Fill in the ??? so that it works like this:
@@ -129,6 +150,23 @@ account.checkBalance(); // => "Your balance is: $150"
 // make the count increase, and down should make the count 
 // decrease:
 
+function makeCounter(init) {
+  // YOUR CODE HERE
+  var counter = init;
+  return {
+    up: function() {
+      return counter = counter + 1;
+    },
+    down: function() {
+      return counter = counter - 1;
+    },
+    reset:function() {
+      return counter = init;
+    }
+  }
+
+}
+
 var counter = makeCounter(0);
 counter.up(); // => 1
 counter.up(); // => 2
@@ -142,8 +180,8 @@ var counter = makeCounter(5);
 counter.up(); // => 6
 counter.up(); // => 7
 counter.reset(); // => 5
-More Practice
-Closures
+// More Practice
+// Closures
 
 // Remember the guessing game from the first week? When we wrote the 
 // first version of the game, we didn't know about closures and stored 
@@ -173,7 +211,7 @@ var game = makeGame(10); // 10 is the upper bound
 game(2); // => "Nope! That wasn't it!"
 game(7); // => "Nope! That wasn't it!"
 game(5); // => "You guessed my number!"
-Ways to improve the game include:
+// Ways to improve the game include:
 
 // A way to "give up" and have the game reset, e.g. game.giveUp().
 
